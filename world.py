@@ -11,8 +11,23 @@ class Transform:
         self.scale    = scale
     
     def get_model_view(self) -> mat4:
+<<<<<<< HEAD
         return mat4.translation(self.position) @ mat4.rotation_x(self.rotation.x) @ mat4.rotation_y(self.rotation.y) @ mat4.rotation_z(self.rotation.z) @ mat4.scale(self.scale)
 
+=======
+        m = mat4.translation(self.position)
+
+        if (self.rotation.x != 0):
+            m *= mat4.rotation_x(self.rotation.x)
+        if (self.rotation.y != 0):
+            m *= mat4.rotation_y(self.rotation.y)
+        if (self.rotation.z != 0):
+            m *= mat4.rotation_z(self.rotation.z)
+        if self.scale.x != 1 or self.scale.y != 1 or self.scale.z != 1:
+            m *= mat4.scale(self.scale)
+        return m
+    
+>>>>>>> 98401e590376dc4b630d981d314905a18f5003b4
     @staticmethod
     def identity() -> 'Transform':
         return Transform(vec3.zero(), vec3.zero(), vec3.one())
