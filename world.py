@@ -11,8 +11,8 @@ class Transform:
         self.scale    = scale
     
     def get_model_view(self) -> mat4:
-        return mat4.translation(self.position) * mat4.rotation_x(self.rotation.x) * mat4.rotation_y(self.rotation.y) * mat4.rotation_z(self.rotation.z) * mat4.scale(self.scale)
-    
+        return mat4.translation(self.position) @ mat4.rotation_x(self.rotation.x) @ mat4.rotation_y(self.rotation.y) @ mat4.rotation_z(self.rotation.z) @ mat4.scale(self.scale)
+
     @staticmethod
     def identity() -> 'Transform':
         return Transform(vec3.zero(), vec3.zero(), vec3.one())
@@ -29,14 +29,19 @@ class Transform:
 
 class Camera:
     def __init__(self, transform : Transform, fov : float, size : Tuple[int, int], clip_near : float, clip_far : float):
-        self.transform = transform
-        self.fov       = fov
-        self.size      = size
-        self.half_size = (size[0] // 2, size[1] // 2)
-        self.clip_near = clip_near
-        self.clip_far  = clip_far
+        self.transform   = transform
+        self.fov         = fov
+        self.size        = size
+        self.half_size   = (size[0] // 2, size[1] // 2)
+        self.clip_near   = clip_near
+        self.clip_far    = clip_far
+        self.view_matrix = mat4.identity()
         self.update_projection()
-        
+        self.update()
+    
+    def update(self):
+        self.view_matrix = self.transform.get_model_view().invert()
+
     def update_projection(self):
         self.projection_matrix = mat4.projection(
             (180.0 - self.fov) * pi / 180.0,
@@ -55,7 +60,7 @@ class Camera:
         surface.fill((0,0,0))
 
     def render_wireframe(self, surface, transform : Transform, mesh : Mesh):
-        mvp = self.projection_matrix * self.transform.get_model_view().invert() * transform.get_model_view()
+        mvp = self.projection_matrix @ self.view_matrix @ transform.get_model_view()
         for a, b, c in mesh.triangles:
             a, b, c = (mvp * a.to_homogenous()).to_cartesian(), (mvp * b.to_homogenous()).to_cartesian(), (mvp * c.to_homogenous()).to_cartesian()
 

@@ -71,6 +71,7 @@ while running:
         obj.update(delta_time)
 
     camera.transform.rotation.y -= delta_time
+    camera.update()
 
     camera.clear(surface)
     for obj in objects:
