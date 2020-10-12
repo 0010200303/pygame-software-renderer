@@ -244,17 +244,29 @@ class mat4:
              self.a * self.f * self.k - self.a * self.g * self.j - self.e * self.b * self.k + self.e * self.c * self.j + self.i * self.b * self.g - self.i * self.c * self.f
         )
         
-        determinant = self.a * inverse.a + self.b * inverse.e + self.c * inverse.i + self.d * inverse.m
-        if determinant == 0:
+        if (determinant := self.a * inverse.a + self.b * inverse.e + self.c * inverse.i + self.d * inverse.m) == 0:
             raise Exception("Matrix can't be inverted.")
+        
         determinant = 1.0 / determinant
 
-        return mat4(
-            inverse.a * determinant, inverse.b * determinant, inverse.c * determinant, inverse.d * determinant,
-            inverse.e * determinant, inverse.f * determinant, inverse.g * determinant, inverse.h * determinant,
-            inverse.i * determinant, inverse.j * determinant, inverse.k * determinant, inverse.l * determinant,
-            inverse.m * determinant, inverse.n * determinant, inverse.o * determinant, inverse.p * determinant
-        )
+        inverse.a *= determinant
+        inverse.b *= determinant
+        inverse.c *= determinant
+        inverse.d *= determinant
+        inverse.e *= determinant
+        inverse.f *= determinant
+        inverse.g *= determinant
+        inverse.h *= determinant
+        inverse.i *= determinant
+        inverse.j *= determinant
+        inverse.k *= determinant
+        inverse.l *= determinant
+        inverse.m *= determinant
+        inverse.n *= determinant
+        inverse.o *= determinant
+        inverse.p *= determinant
+
+        return inverse
     
     @staticmethod
     def identity() -> 'mat4':
