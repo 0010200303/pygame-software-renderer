@@ -2,40 +2,30 @@ from typing import Union, Tuple, List
 from math import sqrt, cos, sin, inf
 
 class vec2:
+    __slots__ = ('x', 'y')
+
     def __init__(self, x : float, y : float):
         self.x, self.y = x, y
     
     def __add__(self, operand : Union['vec2', float]) -> 'vec2':
-        if isinstance(operand, vec2):
-            return vec2(self.x + operand.x, self.y + operand.y)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec2(self.x + operand, self.y + operand)
-        else:
-            raise TypeError('vec2 or float expected')
+        return vec2(self.x + operand.x, self.y + operand.y)
     
     def __sub__(self, operand : Union['vec2', float]) -> 'vec2':
-        if isinstance(operand, vec2):
-            return vec2(self.x - operand.x, self.y - operand.y)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec2(self.x - operand, self.y - operand)
-        else:
-            raise TypeError('vec2 or float expected')
+        return vec2(self.x - operand.x, self.y - operand.y)
     
     def __mul__(self, operand : Union['vec2', float]) -> 'vec2':
-        if isinstance(operand, vec2):
-            return vec2(self.x * operand.x, self.y * operand.y)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec2(self.x * operand, self.y * operand)
-        else:
-            raise TypeError('vec2 or float expected')
+        return vec2(self.x * operand.x, self.y * operand.y)
     
     def __div__(self, operand : Union['vec2', float]) -> 'vec2':
-        if isinstance(operand, vec2):
-            return vec2(self.x / operand.x, self.y / operand.y)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec2(self.x / operand, self.y / operand)
-        else:
-            raise TypeError('vec2 or float expected')
+        return vec2(self.x / operand.x, self.y / operand.y)
     
     def magnitude(self) -> float:
         return sqrt(self.x * self.x + self.y * self.y)
@@ -72,40 +62,30 @@ class vec2:
         return f"vec2({self.x}, {self.y})"
 
 class vec3:
+    __slots__ = ('x', 'y', 'z')
+
     def __init__(self, x : float, y : float, z : float):
         self.x, self.y, self.z = x, y, z
     
     def __add__(self, operand : Union['vec3', float]) -> 'vec3':
-        if isinstance(operand, vec3):
-            return vec3(self.x + operand.x, self.y + operand.y, self.z + operand.z)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec3(self.x + operand, self.y + operand, self.z + operand)
-        else:
-            raise TypeError('vec3 or float expected')
+        return vec3(self.x + operand.x, self.y + operand.y, self.z + operand.z)
     
     def __sub__(self, operand : Union['vec3', float]) -> 'vec3':
-        if isinstance(operand, vec3):
-            return vec3(self.x - operand.x, self.y - operand.y, self.z - operand.z)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec3(self.x - operand, self.y - operand, self.z - operand)
-        else:
-            raise TypeError('vec3 or float expected')
+        return vec3(self.x - operand.x, self.y - operand.y, self.z - operand.z)
     
     def __mul__(self, operand : Union['vec3', float]) -> 'vec3':
-        if isinstance(operand, vec3):
-            return vec3(self.x * operand.x, self.y * operand.y, self.z * operand.z)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec3(self.x * operand, self.y * operand, self.z * operand)
-        else:
-            raise TypeError('vec3 or float expected')
+        return vec3(self.x * operand.x, self.y * operand.y, self.z * operand.z)
     
     def __div__(self, operand : Union['vec3', float]) -> 'vec3':
-        if isinstance(operand, vec3):
-            return vec3(self.x / operand.x, self.y / operand.y, self.z / operand.z)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec3(self.x / operand, self.y / operand, self.z / operand)
-        else:
-            raise TypeError('vec3 or float expected')
+        return vec3(self.x / operand.x, self.y / operand.y, self.z / operand.z)
     
     def magnitude(self) -> float:
         return sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
@@ -146,40 +126,30 @@ class vec3:
         return f"vec3({self.x}, {self.y}, {self.z})"
 
 class vec4:
+    __slots__ = ('x', 'y', 'z', 'w')
+
     def __init__(self, x : float, y : float, z : float, w : float):
         self.x, self.y, self.z, self.w = x, y, z, w
     
     def __add__(self, operand : Union['vec4', float]) -> 'vec4':
-        if isinstance(operand, vec4):
-            return vec4(self.x + operand.x, self.y + operand.y, self.z + operand.z, self.w + operand.w)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec4(self.x + operand, self.y + operand, self.z + operand, self.w + operand.w)
-        else:
-            raise TypeError('vec4 or float expected')
+        return vec4(self.x + operand.x, self.y + operand.y, self.z + operand.z, self.w + operand.w)
     
     def __sub__(self, operand : Union['vec4', float]) -> 'vec4':
-        if isinstance(operand, vec4):
-            return vec4(self.x - operand.x, self.y - operand.y, self.z - operand.z, self.w - operand.w)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec4(self.x - operand, self.y - operand, self.z - operand, self.w - operand)
-        else:
-            raise TypeError('vec4 or float expected')
+        return vec4(self.x - operand.x, self.y - operand.y, self.z - operand.z, self.w - operand.w)
     
     def __mul__(self, operand : Union['vec4', float]) -> 'vec4':
-        if isinstance(operand, vec4):
-            return vec4(self.x * operand.x, self.y * operand.y, self.z * operand.z, self.w * operand.w)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec4(self.x * operand, self.y * operand, self.z * operand, self.w * operand)
-        else:
-            raise TypeError('vec4 or float expected')
+        return vec4(self.x * operand.x, self.y * operand.y, self.z * operand.z, self.w * operand.w)
     
     def __div__(self, operand : Union['vec4', float]) -> 'vec4':
-        if isinstance(operand, vec4):
-            return vec4(self.x / operand.x, self.y / operand.y, self.z / operand.z, self.w / operand.w)
-        elif isinstance(operand, float):
+        if operand.__class__ == float:
             return vec4(self.x / operand, self.y / operand, self.z / operand, self.w / operand)
-        else:
-            raise TypeError('vec4 or float expected')
+        return vec4(self.x / operand.x, self.y / operand.y, self.z / operand.z, self.w / operand.w)
     
     def magnitude(self) -> float:
         return sqrt(self.x * self.x + self.y * self.y + self.z * self.z + self.w * self.w)
@@ -221,38 +191,38 @@ class vec4:
         return f"vec4({self.x}, {self.y}, {self.z}, {self.w})"
 
 class mat4:
+    __slots__ = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p')
+
     def __init__(self, a : float, b : float, c : float, d : float, e : float, f : float, g : float, h : float, i : float, j : float, k : float, l : float, m : float, n : float, o : float, p : float):
         self.a, self.b, self.c, self.d, self.e, self.f, self.g, self.h, self.i, self.j, self.k, self.l, self.m, self.n, self.o, self.p = a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p
 
-    def __mul__(self, operand : Union[vec4, 'mat4']) -> Union[vec4, 'mat4']:
-        if isinstance(operand, mat4):
-            return mat4(
-                self.a * operand.a + self.b * operand.e + self.c * operand.i + self.d * operand.m,
-                self.a * operand.b + self.b * operand.f + self.c * operand.j + self.d * operand.n,
-                self.a * operand.c + self.b * operand.g + self.c * operand.k + self.d * operand.o,
-                self.a * operand.d + self.b * operand.h + self.c * operand.l + self.d * operand.p,
-                self.e * operand.a + self.f * operand.e + self.g * operand.i + self.h * operand.m,
-                self.e * operand.b + self.f * operand.f + self.g * operand.j + self.h * operand.n,
-                self.e * operand.c + self.f * operand.g + self.g * operand.k + self.h * operand.o,
-                self.e * operand.d + self.f * operand.h + self.g * operand.l + self.h * operand.p,
-                self.i * operand.a + self.j * operand.e + self.k * operand.i + self.l * operand.m,
-                self.i * operand.b + self.j * operand.f + self.k * operand.j + self.l * operand.n,
-                self.i * operand.c + self.j * operand.g + self.k * operand.k + self.l * operand.o,
-                self.i * operand.d + self.j * operand.h + self.k * operand.l + self.l * operand.p,
-                self.m * operand.a + self.n * operand.e + self.o * operand.i + self.p * operand.m,
-                self.m * operand.b + self.n * operand.f + self.o * operand.j + self.p * operand.n,
-                self.m * operand.c + self.n * operand.g + self.o * operand.k + self.p * operand.o,
-                self.m * operand.d + self.n * operand.h + self.o * operand.l + self.p * operand.p
-            )
-        elif isinstance(operand, vec4):
-            return vec4(
-                self.a * operand.x + self.b * operand.y + self.c * operand.z + self.d * operand.w,
-                self.e * operand.x + self.f * operand.y + self.g * operand.z + self.h * operand.w,
-                self.i * operand.x + self.j * operand.y + self.k * operand.z + self.l * operand.w,
-                self.m * operand.x + self.n * operand.y + self.o * operand.z + self.p * operand.w
-            )
-        else:
-            raise TypeError('vec4 or mat4 expected')
+    def __matmul__(self, operand : 'mat4') -> 'mat4':
+        return mat4(
+            self.a * operand.a + self.b * operand.e + self.c * operand.i + self.d * operand.m,
+            self.a * operand.b + self.b * operand.f + self.c * operand.j + self.d * operand.n,
+            self.a * operand.c + self.b * operand.g + self.c * operand.k + self.d * operand.o,
+            self.a * operand.d + self.b * operand.h + self.c * operand.l + self.d * operand.p,
+            self.e * operand.a + self.f * operand.e + self.g * operand.i + self.h * operand.m,
+            self.e * operand.b + self.f * operand.f + self.g * operand.j + self.h * operand.n,
+            self.e * operand.c + self.f * operand.g + self.g * operand.k + self.h * operand.o,
+            self.e * operand.d + self.f * operand.h + self.g * operand.l + self.h * operand.p,
+            self.i * operand.a + self.j * operand.e + self.k * operand.i + self.l * operand.m,
+            self.i * operand.b + self.j * operand.f + self.k * operand.j + self.l * operand.n,
+            self.i * operand.c + self.j * operand.g + self.k * operand.k + self.l * operand.o,
+            self.i * operand.d + self.j * operand.h + self.k * operand.l + self.l * operand.p,
+            self.m * operand.a + self.n * operand.e + self.o * operand.i + self.p * operand.m,
+            self.m * operand.b + self.n * operand.f + self.o * operand.j + self.p * operand.n,
+            self.m * operand.c + self.n * operand.g + self.o * operand.k + self.p * operand.o,
+            self.m * operand.d + self.n * operand.h + self.o * operand.l + self.p * operand.p
+        )
+    
+    def __mul__(self, operand : vec4) -> vec4:
+        return vec4(
+            self.a * operand.x + self.b * operand.y + self.c * operand.z + self.d * operand.w,
+            self.e * operand.x + self.f * operand.y + self.g * operand.z + self.h * operand.w,
+            self.i * operand.x + self.j * operand.y + self.k * operand.z + self.l * operand.w,
+            self.m * operand.x + self.n * operand.y + self.o * operand.z + self.p * operand.w
+        )
     
     def invert(self) -> 'mat4':
         inverse = mat4(
