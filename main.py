@@ -58,6 +58,9 @@ while running:
     fps_time  += delta_time
     time      += delta_time
 
+    if time >= 5.0:
+        quit(0)
+
     fps_count += 1
     if fps_time >= 1.0:
         print(f'FPS = {fps_count}')
