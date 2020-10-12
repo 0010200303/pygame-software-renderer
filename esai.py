@@ -214,19 +214,11 @@ class vec4:
     def __repr__(self) -> str:
         return f"vec4({self.x}, {self.y}, {self.z}, {self.w})"
 
-def cartesian_to_homogenous(vec : Union[vec2, vec3], w : float = 1.0) -> Union[vec3, vec4]:
-    if   isinstance(vec, vec2): return vec3(vec.x * w, vec.y * w, w)
-    elif isinstance(vec, vec3): return vec4(vec.x * w, vec.y * w, vec.z * w, w)
-    else: raise TypeError('vec2 or vec3 expected')
+def cartesian_to_homogenous(vec : vec3, /) -> vec4:
+    return vec4(vec.x, vec.y, vec.z, 1.0)
 
-def homogenous_to_cartesian(vec : Union[vec3, vec4]) -> Union[vec2, vec3]:
-    try:
-        if   isinstance(vec, vec3): return vec2(vec.x / vec.w, vec.y / vec.w)
-        elif isinstance(vec, vec4): return vec3(vec.x / vec.w, vec.y / vec.w, vec.z / vec.w)
-        else: raise TypeError('vec3 or vec4 expected')
-    except ZeroDivisionError:
-        if   isinstance(vec, vec3): return vec2(0, 0)
-        elif isinstance(vec, vec4): return vec3(0, 0, 0)
+def homogenous_to_cartesian(vec : vec4, /) -> vec3:
+    return vec3(vec.x / vec.w, vec.y / vec.w, vec.z / vec.w)
 
 class mat4:
     def __init__(self, a : float, b : float, c : float, d : float, e : float, f : float, g : float, h : float, i : float, j : float, k : float, l : float, m : float, n : float, o : float, p : float):
