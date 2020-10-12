@@ -43,12 +43,13 @@ class Camera:
             min(self.size) / max(self.size),
             self.clip_far, self.clip_near
         )
+        self.clip = (self.clip_far - self.clip_near) / 2.0 + self.clip_near
     
     def transform_viewport(self, vec : vec3) -> Tuple[Tuple[int, int], float]:
-        return ((
-            int((vec.x + 1) * self.half_size[0]),
-            int((vec.y + 1) * self.half_size[1])
-        ), (vec.z + 1) * (self.clip_far - self.clip_near) / 2.0 + self.clip_near)
+        return (
+            int((vec.x + 1.0) * self.half_size[0]),
+            int((vec.y + 1.0) * self.half_size[1])
+        ), (vec.z + 1.0) * self.clip
     
     def clear(self, surface):
         surface.fill((0,0,0))
