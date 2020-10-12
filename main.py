@@ -18,28 +18,28 @@ objects   = [
     GameObject(
         'cube',
         Transform(vec3(0.0, 0.0, -5.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('cube.obj'),
+        Mesh.load_obj('meshes/cube.obj'),
         Transform(vec3.zero(), vec3(0.0, 1.0, 1.0), vec3.zero()),
         (255, 255, 255)
     ),
     GameObject(
         'cube',
         Transform(vec3(0.0, 0.0, 5.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('cube.obj'),
+        Mesh.load_obj('meshes/cube.obj'),
         Transform(vec3.zero(), vec3(1.0, 1.0, 0.0), vec3.zero()),
         (255, 255, 255)
     ),
     GameObject(
         'icosphere',
         Transform(vec3(5.0, 0.0, 0.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('icosphere.obj'),
+        Mesh.load_obj('meshes/icosphere.obj'),
         Transform(vec3.zero(), vec3(1.0, 1.0, 0.0), vec3.zero()),
         (255, 255, 255)
     ),
     GameObject(
         'icosphere',
         Transform(vec3(-5.0, 0.0, 0.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('icosphere.obj'),
+        Mesh.load_obj('meshes/icosphere.obj'),
         Transform(vec3.zero(), vec3(1.0, 1.0, 0.0), vec3.zero()),
         (255, 255, 255)
     )
