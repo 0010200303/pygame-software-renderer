@@ -3,7 +3,6 @@ from math import pi
 from typing import Tuple, List
 import pygame.draw as draw
 from threading import Thread
-import functools
 
 class Transform:
     def __init__(self, position : vec3, rotation : vec3, scale : vec3):

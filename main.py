@@ -55,8 +55,10 @@ while running:
             surface = pygame.display.set_mode(size, pygame.RESIZABLE)
             buffer  = (c_uint32 * (size[0] * size[1])).from_address(surface._pixels_address)
             camera.resize(size)
-    
-    delta_time = clock.tick() / 1000.0
+
+    pygame.display.update()
+
+    delta_time = clock.tick(60) / 1000.0
     time      += delta_time
 
     if time >= 5.0:
@@ -76,5 +78,3 @@ while running:
     camera.clear(surface)
     for obj in objects:
         obj.render_wireframe(surface, camera)
-
-    pygame.display.update()
