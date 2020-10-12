@@ -57,7 +57,7 @@ class Camera:
     def render_wireframe(self, surface, transform : Transform, mesh : Mesh):
         mvp = self.projection_matrix * self.transform.get_model_view().invert() * transform.get_model_view()
         for a, b, c in mesh.triangles:
-            a, b, c = homogenous_to_cartesian(mvp * cartesian_to_homogenous(a)), homogenous_to_cartesian(mvp * cartesian_to_homogenous(b)), homogenous_to_cartesian(mvp * cartesian_to_homogenous(c))
+            a, b, c = (mvp * a.to_homogenous()).to_cartesian(), (mvp * b.to_homogenous()).to_cartesian(), (mvp * c.to_homogenous()).to_cartesian()
 
             clip_a = (a.x > 1.0 or a.y > 1.0 or a.z > 1.0 or a.x < -1.0 or a.y < -1.0 or a.z < -1.0)
             clip_b = (b.x > 1.0 or b.y > 1.0 or b.z > 1.0 or b.x < -1.0 or b.y < -1.0 or b.z < -1.0)

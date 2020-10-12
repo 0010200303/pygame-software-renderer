@@ -135,6 +135,9 @@ class vec3:
     
     def to_vec4(self) -> 'vec4':
         return vec4(self.x, self.y, self.z, 0.0)
+
+    def to_homogenous(self) -> 'vec4':
+        return vec4(self.x, self.y, self.z, 1.0)
     
     def __str__(self) -> str:
         return f"({self.x}, {self.y}, {self.z})"
@@ -207,6 +210,9 @@ class vec4:
     
     def to_vec3(self) -> 'vec3':
         return vec3(self.x, self.y, self.z)
+
+    def to_cartesian(self) -> 'vec3':
+        return vec3(self.x / self.w, self.y / self.w, self.z / self.w)
     
     def __str__(self) -> str:
         return f"({self.x}, {self.y}, {self.z}, {self.w})"
