@@ -1,14 +1,15 @@
 from world import Camera, Transform, GameObject, Mesh, vec2, vec3
 from math import sin
+from ctypes import c_uint32, POINTER
 import pygame
 
 size = (800, 600)
 
 pygame.init()
 surface   = pygame.display.set_mode(size, pygame.RESIZABLE)
+buffer    = (c_uint32 * (size[0] * size[1])).from_address(surface._pixels_address)
 running   = True
 time      = 0.0
-fps_count = 0
 fps_time  = 0.0
 
 clock     = pygame.time.Clock()
@@ -52,20 +53,19 @@ while running:
         elif event.type == pygame.VIDEORESIZE:
             size    = (event.w, event.h)
             surface = pygame.display.set_mode(size, pygame.RESIZABLE)
+            buffer  = (c_uint32 * (size[0] * size[1])).from_address(surface._pixels_address)
             camera.resize(size)
     
-    delta_time = clock.tick(240) / 1000.0
-    fps_time  += delta_time
+    delta_time = clock.tick() / 1000.0
     time      += delta_time
 
     if time >= 5.0:
         quit(0)
-
-    fps_count += 1
+    
+    fps_time += delta_time
     if fps_time >= 1.0:
-        print(f'FPS = {fps_count}')
+        print(f'FPS = {clock.get_fps()}')
         fps_time -= 1.0
-        fps_count = 0
 
     for obj in objects:
         obj.update(delta_time)
