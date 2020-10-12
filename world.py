@@ -1,4 +1,4 @@
-from esai import vec2, vec3, vec4, mat4, cartesian_to_homogenous, homogenous_to_cartesian, Mesh
+from esai import vec2, vec3, vec4, mat4, Mesh
 from math import pi
 from typing import Tuple, List
 import pygame.draw as draw
