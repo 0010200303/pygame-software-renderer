@@ -16,30 +16,30 @@ camera    = Camera(Transform.identity(), 120.0, size, 0.001, 1000.0)
 
 objects   = [
     GameObject(
-        'cube',
+        'suzanne',
         Transform(vec3(0.0, 0.0, -5.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('meshes/cube.obj'),
+        Mesh.load_obj('meshes/suzanne.obj'),
         Transform(vec3.zero(), vec3(0.0, 1.0, 1.0), vec3.zero()),
         (255, 255, 255)
     ),
     GameObject(
-        'cube',
+        'suzanne',
         Transform(vec3(0.0, 0.0, 5.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('meshes/cube.obj'),
+        Mesh.load_obj('meshes/suzanne.obj'),
         Transform(vec3.zero(), vec3(1.0, 1.0, 0.0), vec3.zero()),
         (255, 255, 255)
     ),
     GameObject(
-        'icosphere',
+        'suzanne',
         Transform(vec3(5.0, 0.0, 0.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('meshes/icosphere.obj'),
+        Mesh.load_obj('meshes/suzanne.obj'),
         Transform(vec3.zero(), vec3(1.0, 1.0, 0.0), vec3.zero()),
         (255, 255, 255)
     ),
     GameObject(
-        'icosphere',
+        'suzanne',
         Transform(vec3(-5.0, 0.0, 0.0), vec3(0.0, 0.0, 0.0), vec3.one()),
-        Mesh.load_obj('meshes/icosphere.obj'),
+        Mesh.load_obj('meshes/suzanne.obj'),
         Transform(vec3.zero(), vec3(1.0, 1.0, 0.0), vec3.zero()),
         (255, 255, 255)
     )
