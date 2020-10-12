@@ -220,12 +220,6 @@ class vec4:
     def __repr__(self) -> str:
         return f"vec4({self.x}, {self.y}, {self.z}, {self.w})"
 
-def cartesian_to_homogenous(vec : vec3, /) -> vec4:
-    return vec4(vec.x, vec.y, vec.z, 1.0)
-
-def homogenous_to_cartesian(vec : vec4, /) -> vec3:
-    return vec3(vec.x / vec.w, vec.y / vec.w, vec.z / vec.w)
-
 class mat4:
     def __init__(self, a : float, b : float, c : float, d : float, e : float, f : float, g : float, h : float, i : float, j : float, k : float, l : float, m : float, n : float, o : float, p : float):
         self.a, self.b, self.c, self.d, self.e, self.f, self.g, self.h, self.i, self.j, self.k, self.l, self.m, self.n, self.o, self.p = a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p
@@ -372,9 +366,6 @@ class mat4:
 class Mesh:
     def __init__(self, triangles : List[Tuple[vec3, vec3, vec3]]):
         self.triangles  = triangles
-        self.vertices_a = list(map(lambda triangle: triangle[0], self.triangles))
-        self.vertices_b = list(map(lambda triangle: triangle[1], self.triangles))
-        self.vertices_c = list(map(lambda triangle: triangle[2], self.triangles))
     
     @staticmethod
     def load_obj(path : str) -> 'Mesh':
