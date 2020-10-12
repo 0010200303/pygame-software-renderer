@@ -1,8 +1,9 @@
-from esai import vec2, vec3, vec4, mat4, Mesh
+from esai import vec2, vec3, vec4, mat4, Mesh, homogeneous_to_cartesian, cartesian_to_homogeneous
 from math import pi
 from typing import Tuple, List
 import pygame.draw as draw
 from threading import Thread
+import functools
 
 class Transform:
     def __init__(self, position : vec3, rotation : vec3, scale : vec3):
@@ -69,8 +70,14 @@ class Camera:
 
     def render_wireframe(self, surface, transform : Transform, mesh : Mesh):
         mvp = self.projection_matrix @ self.view_matrix @ transform.get_model_view()
+
+        h_to_c = homogeneous_to_cartesian
+        c_to_h = cartesian_to_homogeneous
+        draw_lines = draw.lines
+        trans_viewport = self.transform_viewport
+
         for a, b, c in mesh.triangles:
-            a, b, c = (mvp * a.to_homogenous()).to_cartesian(), (mvp * b.to_homogenous()).to_cartesian(), (mvp * c.to_homogenous()).to_cartesian()
+            a, b, c = h_to_c(mvp * c_to_h(a)), h_to_c(mvp * c_to_h(b)), h_to_c(mvp * c_to_h(c))
 
             clip_a = (a.x > 1.0 or a.y > 1.0 or a.z > 1.0 or a.x < -1.0 or a.y < -1.0 or a.z < -1.0)
             clip_b = (b.x > 1.0 or b.y > 1.0 or b.z > 1.0 or b.x < -1.0 or b.y < -1.0 or b.z < -1.0)
@@ -78,13 +85,13 @@ class Camera:
             
             if (3 - (clip_a + clip_b + clip_c)) > 1:
                 if clip_a:
-                    draw.lines(surface, (255, 255, 255), True, [self.transform_viewport(b)[0], self.transform_viewport(c)[0]], 1)
+                    draw_lines(surface, (255, 255, 255), True, [trans_viewport(b)[0], trans_viewport(c)[0]], 1)
                 elif clip_b:
-                    draw.lines(surface, (255, 255, 255), True, [self.transform_viewport(a)[0], self.transform_viewport(c)[0]], 1)
+                    draw_lines(surface, (255, 255, 255), True, [trans_viewport(a)[0], trans_viewport(c)[0]], 1)
                 elif clip_c:
-                    draw.lines(surface, (255, 255, 255), True, [self.transform_viewport(a)[0], self.transform_viewport(b)[0]], 1)
+                    draw_lines(surface, (255, 255, 255), True, [trans_viewport(a)[0], trans_viewport(b)[0]], 1)
                 else:
-                    draw.lines(surface, (255, 255, 255), True, [self.transform_viewport(a)[0], self.transform_viewport(b)[0], self.transform_viewport(c)[0]], 1)
+                    draw_lines(surface, (255, 255, 255), True, [trans_viewport(a)[0], trans_viewport(b)[0], trans_viewport(c)[0]], 1)
     
     def resize(self, size : Tuple[int, int]):
         self.size      = size

@@ -190,6 +190,12 @@ class vec4:
     def __repr__(self) -> str:
         return f"vec4({self.x}, {self.y}, {self.z}, {self.w})"
 
+def homogeneous_to_cartesian(v: vec4) -> vec3:
+    return vec3(v.x / v.w, v.y / v.w, v.z / v.w)
+
+def cartesian_to_homogeneous(v: vec3) -> vec4:
+    return vec4(v.x, v.y, v.z, 1.0)
+
 class mat4:
     __slots__ = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p')
 
